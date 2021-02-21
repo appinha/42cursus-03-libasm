@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 15:59:46 by apuchill          #+#    #+#             */
-/*   Updated: 2021/02/16 16:06:51 by apuchill         ###   ########.fr       */
+/*   Updated: 2021/02/21 17:59:26 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 ** -.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-.-'-
 **                              HEADERS
 */
-# include <stdlib.h>
+//# include <stdlib.h>
+# include <sys/types.h>
 # include <sys/errno.h>
 
 /*
