@@ -11,13 +11,14 @@
 ; **************************************************************************** ;
 
 ;    FUNCTION PROTOTYPE
-; size_t	ft_strlen(const char *s);
+; size_t	ft_strlen(const char *s)
+; More info: man 3 strlen
 
 ;    INPUT
-; 1st argument:	rdi -> *s
+; 1st argument:	rdi -> const char *s
 
 ;    OUTPUT
-; return:		rax -> len
+; return:		rax -> size_t len
 
 global		ft_strlen
 
