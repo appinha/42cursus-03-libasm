@@ -10,19 +10,20 @@
 ;                                                                              ;
 ; **************************************************************************** ;
 
-;    FUNCTION PROTOTYPE
+; ------------------------------------------------------------------------------
+;    FUNCTION PROTOTYPE (man 3 strlen)
 ; size_t	ft_strlen(const char *s)
-; More info: man 3 strlen
-
+;
 ;    INPUT
 ; 1st argument:	rdi -> const char *s
-
+;
 ;    OUTPUT
 ; return:		rax -> size_t len
+; ------------------------------------------------------------------------------
 
-global		ft_strlen
+	global		ft_strlen
 
-section		.text
+	section		.text
 
 ft_strlen:
 	mov rax, -1				; i = -1
