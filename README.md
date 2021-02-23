@@ -10,7 +10,7 @@ _Development repo for 42cursus' **libasm** project_
 
 For further information about **42cursus** and its projects, please refer to [42cursus repo](https://github.com/appinha/42cursus).
 
-## Table of contents
+## 🔍 Table of contents
 
 1. [About](#about)
 1. [Index](#index)
@@ -21,15 +21,43 @@ For further information about **42cursus** and its projects, please refer to [42
 
 ---
 
-## About
+## 🗣️ About
 
 > _The aim of this project is to get familiar with assembly language._
 
-📃 Detailed information: [subject of this project](https://github.com/appinha/42cursus/tree/master/_PDFs)
+For detailed information, refer to the [subject of this project](https://github.com/appinha/42cursus/tree/master/_PDFs).
 
-**tldr:** recoding `libc` functions in Linux x86-64 Intel Assembly
+### 🚀 tldr
 
-## Index
+Recoding of the following `libc` and custom functions in **Linux x86-64 Assembly (Intel syntax)**.
+
+**Mandatory:**
+```C
+size_t		ft_strlen(const char *s);
+char		*ft_strcpy(char *dst, const char *src);
+int		ft_strcmp(const char *s1, const char *s2);
+ssize_t		ft_write(int fd, const void *buf, size_t count);
+ssize_t		ft_read(int fd, void *buf, size_t count);
+char		*ft_strdup(const char *s1);
+```
+
+**Bonus:**
+```C
+typedef struct	s_list
+{
+	void		*data;
+	struct s_list	*next;
+}		t_list;
+
+int		ft_atoi_base(char const *str, char const *base);
+void		ft_list_push_front(t_list **begin_list, void *data);
+int		ft_list_size(t_list *begin_list);
+void		ft_list_sort(t_list **begin_list,int (*cmp)());
+void		ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void*));
+```
+
+
+## 📑 Index
 
 `@root`
 
@@ -41,13 +69,13 @@ For further information about **42cursus** and its projects, please refer to [42
 
 `@/srcs/`
 
-* **\*.s** - source code (in assembly language).
+* [**\*.s**](srcs/) - source code (in assembly language).
 
 `@/tests/`
 
 * [**main.c**](main.c) - source code (in C language) for testing the library.
 
-## Usage
+## 🛠️ Usage
 
 ### Requirements
 
@@ -79,7 +107,7 @@ To compile, run:
 $ make
 ```
 
-### Testing
+### 📋 Testing
 
 After compiling the library with `make`, simply run:
 
@@ -89,13 +117,15 @@ $ make test
 
 ---
 
-## Useful Links
+## 📌 Useful Links
 
 * [Tutorial playlist: x86_64 Linux Assembly](https://www.youtube.com/playlist?list=PLetF-YjXm-sCH6FrTz4AQhfH6INDQvQSn)
+* [NASM Tutorial](https://cs.lmu.edu/~ray/notes/nasmtutorial/)
 * [X86 64 Register and Instruction Quick Start](https://wiki.cdot.senecacollege.ca/wiki/X86_64_Register_and_Instruction_Quick_Start)
 * [x86_64 NASM Assembly Quick Reference ("Cheat Sheet")](https://www.cs.uaf.edu/2017/fall/cs301/reference/x86_64.html)
+* [Linux System Call Table for x86 64](https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/)
 
-## Study Summary
+## 🤓 Study Summary
 
 ### Registers
 
@@ -144,10 +174,10 @@ A system call, or **syscall**, or function call, is when a program requests a se
 Usage of **registers** in syscalls: a 64 bit Linux machine passes **function parameters** in `rdi`, `rsi`, `rdx`, `rcx`, `r8`, and `r9`. Any additional parameters get pushed on the stack.
 
 * `rax` - **syscall ID**.
-* `rdi`, `rsi`, `rdx`, `rcx`, `r8`, `r9` - first **six arguments**; remaining arguments are on the stack.
+* `rdi`, `rsi`, `rdx`, `rcx`, `r8`, `r9` - first **six arguments** (in order); remaining arguments are on the stack.
 * `rax` - **return value** (after syscall is finished).
 
-**Syscall List**
+**Linux x86-64 Syscall List** (non exaustive)
 
 | syscall	| ID	| ARG1		| ARG2		| ARG3
 |:--		|:-:	|:--		|:--		|:--
@@ -157,29 +187,62 @@ Usage of **registers** in syscalls: a 64 bit Linux machine passes **function par
 | sys_close	| 3		| #fd		| -			| -
 | sys_exit	| 60	| #errcode	| -			| -
 
-_Note the syntax:_
+> _Note the syntax:_
+>
+> * _Immediate (number) values are prefixed by #_
+> * _Memory address to the data (stored in the register) are prefixed by $_
 
-* _Immediate (number) values are prefixed by #_
-* _Memory address to the data (stored in the register) are prefixed by $_
+For more syscalls: [Linux System Call Table for x86 64](https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/)
 
 ### Instructions
 
-| Mnemonic	| Purpose	| Examples
-|:--		|:--		|:--
-| mov _dest,src_	| Move data between registers, load immediate data into registers, move data between registers and memory.	| `mov rax,4`</br>`mov rdx,rax`</br>`mov rdx,[123]`
-| push _src_	| Insert a value onto the stack. Useful for passing arguments, saving registers, etc.	| `push rbp`
-| pop _dest_	| Remove topmost value from the stack. Equivalent to "mov _dest_, [rsp]; add 8,rsp"	| `pop rbp`
-| add _dest,src_	| _dest = dest + src_	| `add rax,rdx`
-| mul _src_	| Multiply rax and _src_ as unsigned integers, and put the result in rax. High 64 bits of product (usually zero) go into rdx.	| `mul rdx`
-| div _src_	| Divide rax by _src_, and put the ratio into rax, and the remainder into rdx. Bizarrely, on input rdx must be zero, or you get a SIGFPE.	| `mov rdx,0`</br>`div rcx`
-| shr _val,bits_	| Bitshift a value right by a constant, or the low 8 bits of rcx ("cl"). Shift count MUST go in rcx, no other register will do!	| `add rcx,4`</br>`shr rax,cl`
-| jmp _label_	| Go to the instruction _label_. Skips anything else in the way.	| `jmp post_mem`
-| cmp _a,b_	| Compare two values. Sets flags that are used by the conditional jumps (below).	| `cmp rax,10`
-| jl _label_	| Go to _label_ if previous comparison came out as less-than. Other conditionals available are: jle (<=), je (==), jge (>=), jg (>), jne (!=), and many others. Also available in unsigned comparisons: jb (<), jbe (<=), ja (>), jae (>=).	| `jl loop_start`
-| call _func_	| Push the address of the next instruction and start executing func.	| `call print_int`
-| ret	| Pop the return program counter, and jump there. Ends a subroutine.	| `ret`
+* `mov DEST, SRC` - move data between registers, move data between registers and memory.
+* `mov DEST, VAL` - load immediate data into registers.
 
-**Note:** for the `mov` instruction, a suffix can be appended indicating the _amount of data to be moved_ -- e.g., `q` for **quadword** (64 bits), `d` for **doubleword** (32 bits), `w` for **word** (16 bits), or `b` for **byte** (8 bits).
+_Examples:_ `mov rdx,rax` | `mov rdx,[123]` | `mov rax,4`
+
+* `push SRC` - insert onto the stack; useful for passing arguments, saving registers, etc.
+* `pop DEST` - remove topmost value from the stack onto given register. Equivalent to `mov DEST, [rsp]`; `add 8, rsp`.
+
+_Examples:_ `push rbp` | `pop rbp`
+
+* `inc REG` - increment value in register (`i++`).
+* `dec REG` - decrease value in register (`i--`).
+
+_Examples:_ `inc rcx` | `dec rcx`
+
+* `add DEST, SRC` - sum: _DEST = DEST + SRC_
+* `sub DEST, SRC` - subtraction: _DEST = DEST - SRC_
+
+_Examples:_ `add rax, rdx` | `add rax, 4` | `sub rax, rdx` | `sub rax, 4`
+
+* `mul SRC` - multiplication (unsigned integers): _`rax` = `rax` * src_. High 64 bits of product (usually zero) go into `rdx`.
+* `div src`	division: _`rax` = `rax` / src_ (ratio into `rax`, and the remainder into `rdx`). Bizarrely, on input rdx must be zero, or you get a SIGFPE.
+
+ _Examples:_ `mul rdx` | `mul 6` | `mov rdx,0`; `div rcx` | `div 3`
+
+* `and DEST, SRC` - bitwise AND operator: _DEST = DEST & SRC_
+* `xor DEST, SRC` - bitwise XOR operator: _DEST = DEST ^ SRC_
+* `xor REG, REG` - used for initializing register with 0. Same as `mov REG, 0` (but faster).
+
+_Examples:_ `and rax, rdx` | `xor rax, rdx` | `xor rax, rax`
+
+* `shr VAL, BITS` - bitshift a value right by a constant, or the low 8 bits of rcx ("cl"). Shift count MUST go in `rcx`, no other register will do.
+
+ _Examples:_ `add rcx,4`; `shr rax,cl`
+
+* `cmp A, B` - compare two values, setting flags that are used by the conditional jumps (below).
+* `j* LABEL` - go to _label_ depending on result of previous comparison. Conditionals available: `je` (==), `jne` (!=), `jl` (<), `jle` (<=), `jge` (>=), `jg` (>), `jz` (= 0), `jnz` (!= 0), and many others. Also available in unsigned comparisons: `jb` (<), `jbe` (<=), `ja` (>), `jae` (>=).
+* `jmp LABEL` - Go to the instruction _label_. Skips anything else in the way.
+
+ _Examples:_ `cmp rax,10`; `jl loop_start` | `jmp post_mem`
+
+* `call FT` - function call. Push the address of the next instruction and start executing function.
+* `ret` - return. Pop the return program counter, and jump there. Ends a subroutine.
+
+ _Examples:_ `call print_int` | `ret`
+
+> _Note: for the `mov` instruction, a suffix can be appended indicating the _amount of data to be moved_ - e.g., `q` for **quadword** (64 bits), `d` for **doubleword** (32 bits), `w` for **word** (16 bits), or `b` for **byte** (8 bits)._
 
 **Explained examples**
 
@@ -196,9 +259,9 @@ _Note the syntax:_
 `add %r10,%r11` - add r10 and r11, put result in r11
 `add #5,%r10` - add 5 to r10, put result in r10
 
-`div %r10` - divide rax by the given register (r10), places quotient into rax and remainder into rdx (rdx must be zero before this instruction)
-
 `mul %r10` - multiplies rax by r10, places result in rax and overflow in rdx
+
+`div %r10` - divide rax by the given register (r10), places quotient into rax and remainder into rdx (rdx must be zero before this instruction)
 
 `cmp %r10,%r11` - compare register r10 with register r11. The comparison sets flags in the processor status register which affect conditional jumps.
 `cmp #99,%r11` - compare the number 99 with register r11. The comparison sets flags in the processor status register which affect conditional jumps.
@@ -215,23 +278,23 @@ _Note the syntax:_
 
 `syscall` - invoke a syscall
 
-_Note the syntax:_
-
-* _Register names are prefixed by %_
-* _Immediate (number) values are prefixed by #_
-* _Indirect memory access is indicated by (parenthesis)._
-* _Hexadecimal values are indicated by a 0x prefix._
-* _Character values are indicated by quotation marks. Escapes (such as '\n') are permitted._
-* _Data sources are given as the first argument (mov %r10,%r11 moves FROM r10 INTO r11)._
+> _Note the syntax:_
+>
+> * _Register names are prefixed by %_
+> * _Immediate (number) values are prefixed by #_
+> * _Indirect memory access is indicated by (parenthesis)._
+> * _Hexadecimal values are indicated by a 0x prefix._
+> * _Character values are indicated by quotation marks. Escapes (such as '\n') are permitted._
+> * _Data sources are given as the first argument (mov %r10,%r11 moves FROM r10 INTO r11)._
 
 ### Memory access
 
-| C datatype| Bits	| Bytes	| Register	| Access memory	| Allocate memory
+| C datatypeBits	| Bytes	| Register	| Access memory	| Allocate memory
 |:-:		|:-:	|:-:	|:-:		|:-:			|:-:
-| char		| 8		| 1		| al		| BYTE [ptr]	| db
-| short		| 16	| 2		| ax		| WORD [ptr]	| dw
-| int		| 32	| 4		| eax		| DWORD [ptr]	| dd
-| long		| 64	| 8		| rax		| QWORD [ptr]	| dq
+| char		| 8		| 1		| al		| BYTE [ptr]	db
+| short		| 16	| 2		| ax		| WORD [ptr]	dw
+| int		| 32	| 4		| eax		| DWORD [ptr]	dd
+| long		| 64	| 8		| rax		| QWORD [ptr]	dq
 
 ### Sections
 
