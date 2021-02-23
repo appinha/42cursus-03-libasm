@@ -12,12 +12,12 @@ For further information about **42cursus** and its projects, please refer to [42
 
 ## 🔍 Table of contents
 
-1. [About](#about)
-1. [Index](#index)
-2. [Usage](#usage)
-3. [Testing](#testing)
-4. [Useful Links](useful-links)
-5. [Study Summary](study-summary)
+1. [About](#%EF%B8%8F-about)
+1. [Index](#-index)
+2. [Usage](#%EF%B8%8F-usage)
+3. [Testing](#-testing)
+4. [Useful Links](#-useful-links)
+5. [Study Summary](#-study-summary)
 
 ---
 
@@ -27,9 +27,7 @@ For further information about **42cursus** and its projects, please refer to [42
 
 For detailed information, refer to the [subject of this project](https://github.com/appinha/42cursus/tree/master/_PDFs).
 
-### 🚀 tldr
-
-Recoding of the following `libc` and custom functions in **Linux x86-64 Assembly (Intel syntax)**.
+🚀 **tldr:** Recoding of the following `libc` and custom functions in _Linux x86-64 Assembly (Intel syntax)_.
 
 **Mandatory:**
 ```C
@@ -55,7 +53,6 @@ int		ft_list_size(t_list *begin_list);
 void		ft_list_sort(t_list **begin_list,int (*cmp)());
 void		ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void*));
 ```
-
 
 ## 📑 Index
 
@@ -107,7 +104,7 @@ To compile, run:
 $ make
 ```
 
-### 📋 Testing
+## 📋 Testing
 
 After compiling the library with `make`, simply run:
 
