@@ -17,7 +17,7 @@
 ;    INPUT
 ; 1st argument:	rdi -> int fd
 ; 2nd argument:	rsi -> const void *buf
-; 1rd argument:	rdx -> size_t count
+; 3rd argument:	rdx -> size_t count
 ;
 ;    OUTPUT
 ; return:		rax -> ssize_t count
