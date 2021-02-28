@@ -6,7 +6,7 @@
 #    By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 15:56:04 by apuchill          #+#    #+#              #
-#    Updated: 2021/02/22 08:29:28 by apuchill         ###   ########.fr        #
+#    Updated: 2021/02/28 11:41:01 by apuchill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ DIR_SRCS	= srcs
 DIR_OBJS	= objs
 DIR_TEST	= tests
 
-SRCS		= ft_strlen.s ft_write.s
+SRCS		= ft_strlen.s ft_write.s ft_read.s ft_strcpy.s
 OBJS		= $(patsubst %.s, ${DIR_OBJS}/%.o, ${SRCS})
 TEST_SRCS	= $(foreach dir, $(DIR_TEST), $(wildcard $(dir)/*.c))
 
@@ -50,7 +50,7 @@ test:		$(NAME) $(TEST_SRCS)
 			echo $(C_H_TITLE) && cat $(DIR_TEST)/header_title.txt && \
 			echo "\033[1m\033[38;5;23m42saopaulo" \
 			$(C_H_LINE) && cat $(DIR_TEST)/header_line2.txt && echo $(C_END)
-			@./$(TEST)
+			@./$(TEST) all
 
 clean:
 			@$(RM) $(OBJS)
