@@ -1,23 +1,38 @@
-# 42cursus' libasm
+<h1 align="center">
+	42cursus' libasm
+</h1>
 
-![Code size in bytes](https://img.shields.io/github/languages/code-size/appinha/42cursus-03-libasm?color=blueviolet)
-![Number of lines of code](https://img.shields.io/tokei/lines/github/appinha/42cursus-03-libasm?color=blueviolet)
-![Code language count](https://img.shields.io/github/languages/count/appinha/42cursus-03-libasm?color=blue)
-![GitHub top language](https://img.shields.io/github/languages/top/appinha/42cursus-03-libasm?color=blue)
-![GitHub last commit](https://img.shields.io/github/last-commit/appinha/42cursus-03-libasm?color=brightgreen)
+<p align="center">
+	<b><i>Development repo for 42cursus' libasm project</i></b><br>
+	For further information about <b>42cursus</b> and its projects, please refer to <a href="https://github.com/appinha/42cursus">42cursus repo</a>.
+</p>
 
-_Development repo for 42cursus' **libasm** project_
+<p align="center">
+	<img src="https://img.shields.io/github/languages/code-size/appinha/42cursus-03-libasm?color=blueviolet"
+		alt="Code size in bytes">
+	<img src="https://img.shields.io/tokei/lines/github/appinha/42cursus-03-libasm?color=blueviolet"
+		alt="Number of lines of code">
+	<img src="https://img.shields.io/github/languages/count/appinha/42cursus-03-libasm?color=blue"
+		alt="Code language count">
+	<img src="https://img.shields.io/github/languages/top/appinha/42cursus-03-libasm?color=blue"
+		alt="GitHub top language">
+	<img src="https://img.shields.io/github/last-commit/appinha/42cursus-03-libasm?color=brightgreen"
+		alt="GitHub last commit">
+</p>
 
-For further information about **42cursus** and its projects, please refer to [42cursus repo](https://github.com/appinha/42cursus).
-
-## 🔍 Table of contents
-
-1. [About](#%EF%B8%8F-about)
-1. [Index](#-index)
-2. [Usage](#%EF%B8%8F-usage)
-3. [Testing](#-testing)
-4. [Useful Links](#-useful-links)
-5. [Study Summary](#-study-summary)
+<h3 align="center">
+	<a href="#%EF%B8%8F-about">About</a>
+	<span> · </span>
+	<a href="#-index">Index</a>
+	<span> · </span>
+	<a href="#%EF%B8%8F-usage">Usage</a>
+	<span> · </span>
+	<a href="#-testing">Testing</a>
+	<span> · </span>
+	<a href="#-useful-links">Useful Links</a>
+	<span> · </span>
+	<a href="#-study-summary">Study Summary</a>
+</h3>
 
 ---
 
@@ -111,8 +126,6 @@ After compiling the library with `make`, simply run:
 ```shell
 $ make test
 ```
-
----
 
 ## 📌 Useful Links
 
