@@ -4,20 +4,15 @@
 
 <p align="center">
 	<b><i>Development repo for 42cursus' libasm project</i></b><br>
-	For further information about <b>42cursus</b> and its projects, please refer to <a href="https://github.com/appinha/42cursus">42cursus repo</a>.
+	For further information about 42cursus and its projects, please refer to <a href="https://github.com/appinha/42cursus"><b>42cursus repo</b></a>.
 </p>
 
 <p align="center">
-	<img src="https://img.shields.io/github/languages/code-size/appinha/42cursus-03-libasm?color=blueviolet"
-		alt="Code size in bytes">
-	<img src="https://img.shields.io/tokei/lines/github/appinha/42cursus-03-libasm?color=blueviolet"
-		alt="Number of lines of code">
-	<img src="https://img.shields.io/github/languages/count/appinha/42cursus-03-libasm?color=blue"
-		alt="Code language count">
-	<img src="https://img.shields.io/github/languages/top/appinha/42cursus-03-libasm?color=blue"
-		alt="GitHub top language">
-	<img src="https://img.shields.io/github/last-commit/appinha/42cursus-03-libasm?color=brightgreen"
-		alt="GitHub last commit">
+	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/appinha/42cursus-03-libasm?color=blueviolet" />
+	<img alt="Number of lines of code" src="https://img.shields.io/tokei/lines/github/appinha/42cursus-03-libasm?color=blueviolet" />
+	<img alt="Code language count" src="https://img.shields.io/github/languages/count/appinha/42cursus-03-libasm?color=blue" />
+	<img alt="GitHub top language" src="https://img.shields.io/github/languages/top/appinha/42cursus-03-libasm?color=blue" />
+	<img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/appinha/42cursus-03-libasm?color=brightgreen" />
 </p>
 
 <h3 align="center">
@@ -40,9 +35,9 @@
 
 > _The aim of this project is to get familiar with assembly language._
 
-For detailed information, refer to the [subject of this project](https://github.com/appinha/42cursus/tree/master/_PDFs).
+For detailed information, refer to the [**subject of this project**](https://github.com/appinha/42cursus/tree/master/_PDFs).
 
-🚀 **tldr:** Recoding of the following `libc` and custom functions in _Linux x86-64 Assembly (Intel syntax)_.
+> 🚀 **tldr:** Recoding of the following `libc` and custom functions in _Linux x86-64 Assembly (Intel syntax)_.
 
 **Mandatory:**
 ```C
@@ -78,6 +73,7 @@ void		ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void 
 `@/includes/`
 
 * [**libasm.h**](includes/libasm.h) - library header.
+* [**tests.h**](includes/tests.h) - header for the test suit.
 
 `@/srcs/`
 
@@ -85,7 +81,8 @@ void		ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void 
 
 `@/tests/`
 
-* [**main.c**](main.c) - source code (in C language) for testing the library.
+* [**main.c**](tests/main.c) - source code (in C language) for testing the library.
+* [**\*.txt**](tests/) - auxiliary files.
 
 ## 🛠️ Usage
 
@@ -147,7 +144,7 @@ The 64-bit versions of the 'original' x86 registers are named:
 * `rbx` - register b extended.
 * `rcx` - register c extended; some instructions use it as a counter.
 * `rdx` - register d extended.
-* `rbp` - register base pointer; start of stack.
+* `rbp` - register base pointer; start of stack (stack's base).
 * `rsp` - register stack pointer; current location in stack (stack's top), growing downwards.
 * `rsi` - register source index; source for data copies; used to pass function argument #2.
 * `rdi` - register destination index; destination for data copies; used to pass function argument #1.
@@ -159,23 +156,23 @@ The registers added for 64-bit mode are named in numbered sequence: `r8`, `r9`, 
 There are two types of registers: _"scratch"_ and _"preserved"_. **Scratch** registers may be used by any function and are allowed to be overwritten. **Preserved** registers can also be used by functions, but their content must be saved and restored afterwards.
 
 | Name	| Type		| 64-bit long	| 32-bit int	| 16-bit short	| 8-bit char
-|:-:	|:-:		|:-:			|:-:			|:-:			|:-:
-| `rax`	| scratch	| rax	| eax	| ax	| ah and al
-| `rbx`	| preserved	| rbx	| ebx	| bx	| bh and bl
-| `rcx`	| scratch	| rcx	| ecx	| cx	| ch and cl
-| `rdx`	| scratch	| rdx	| edx	| dx	| dh and dl
-| `rsp`	| preserved	| rsp	| esp	| sp	| spl
-| `rbp`	| preserved	| rbp	| ebp	| bp	| bpl
-| `rsi`	| scratch	| rsi	| esi	| si	| sil
-| `rdi`	| scratch	| rdi	| edi	| di	| dil
-| `r8`	| scratch	| r8	| r8d	| r8w	| r8b
-| `r9`	| scratch	| r9	| r9d	| r9w	| r9b
-| `r10`	| scratch	| r10	| r10d	| r10w	| r10b
-| `r11`	| scratch	| r11	| r11d	| r11w	| r11b
-| `r12`	| preserved	| r12	| r12d	| r12w	| r12b
-| `r13`	| preserved	| r13	| r13d	| r13w	| r13b
-| `r14`	| preserved	| r14	| r14d	| r14w	| r14b
-| `r15`	| preserved	| r15	| r15d	| r15w	| r15b
+|:-:	|:-:						|:-:			|:-:			|:-:			|:-:
+| `rax`	| scratch / syscall ID and return	| rax	| eax	| ax	| ah and al
+| `rbx`	| preserved					| rbx	| ebx	| bx	| bh and bl
+| `rcx`	| scratch / 4th argument or counter	| rcx	| ecx	| cx	| ch and cl
+| `rdx`	| scratch / 3rd argument	| rdx	| edx	| dx	| dh and dl
+| `rsp`	| preserved / stack's top	| rsp	| esp	| sp	| spl
+| `rbp`	| preserved / stack's base	| rbp	| ebp	| bp	| bpl
+| `rsi`	| scratch / 2nd argument	| rsi	| esi	| si	| sil
+| `rdi`	| scratch / 1st argument	| rdi	| edi	| di	| dil
+| `r8`	| scratch / 5th argument	| r8	| r8d	| r8w	| r8b
+| `r9`	| scratch / 6th argument	| r9	| r9d	| r9w	| r9b
+| `r10`	| scratch					| r10	| r10d	| r10w	| r10b
+| `r11`	| scratch					| r11	| r11d	| r11w	| r11b
+| `r12`	| preserved					| r12	| r12d	| r12w	| r12b
+| `r13`	| preserved					| r13	| r13d	| r13w	| r13b
+| `r14`	| preserved					| r14	| r14d	| r14w	| r14b
+| `r15`	| preserved					| r15	| r15d	| r15w	| r15b
 
 ### System Call
 
@@ -300,11 +297,11 @@ _Examples:_ `and rax, rdx` | `xor rax, rdx` | `xor rax, rax`
 ### Memory access
 
 | C datatypeBits	| Bytes	| Register	| Access memory	| Allocate memory
-|:-:		|:-:	|:-:	|:-:		|:-:			|:-:
-| char		| 8		| 1		| al		| BYTE [ptr]	db
-| short		| 16	| 2		| ax		| WORD [ptr]	dw
-| int		| 32	| 4		| eax		| DWORD [ptr]	dd
-| long		| 64	| 8		| rax		| QWORD [ptr]	dq
+|:-:				|:-:	|:-:		|:-:			|:-:
+| char				| 8		| 1			| al			| BYTE [ptr] db
+| short				| 16	| 2			| ax			| WORD [ptr] dw
+| int				| 32	| 4			| eax			| DWORD [ptr] dd
+| long				| 64	| 8			| rax			| QWORD [ptr] dq
 
 ### Sections
 
