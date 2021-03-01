@@ -6,7 +6,7 @@
 #    By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 15:56:04 by apuchill          #+#    #+#              #
-#    Updated: 2021/02/28 20:07:35 by apuchill         ###   ########.fr        #
+#    Updated: 2021/02/28 22:47:23 by apuchill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ DIR_SRCS	= srcs
 DIR_OBJS	= objs
 DIR_TEST	= tests
 
-SRCS		= ft_strlen.s ft_write.s ft_read.s ft_strcpy.s ft_strcmp.s
+SRCS		= ft_strlen.s ft_write.s ft_read.s ft_strcpy.s ft_strcmp.s \
+				ft_strdup.s
 OBJS		= $(patsubst %.s, ${DIR_OBJS}/%.o, ${SRCS})
 TEST_SRCS	= $(foreach dir, $(DIR_TEST), $(wildcard $(dir)/*.c))
 
@@ -27,7 +28,7 @@ ASM			= nasm
 ASM_FLAGS	= -f elf64
 
 CC			= clang
-CFLAGS		= -Wall -Wextra -Werror -lasm -L . -g3 -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror -lasm -L .
 
 RM			= /bin/rm -f
 
