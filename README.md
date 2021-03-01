@@ -81,8 +81,8 @@ void		ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void 
 
 `@/tests/`
 
-* [**main.c**](tests/main.c) - source code (in C language) for testing the library.
-* [**\*.txt**](tests/) - auxiliary files.
+* [**\*.c**](tests/c) - source code (in C language) for testing the library.
+* [**\*.txt**](tests/) - auxiliary files for outputting the test.
 
 ## 🛠️ Usage
 
@@ -100,7 +100,7 @@ _Usage example_
 
 **2. Install requirements**
 
-To compile assembly code, an _assembler_ is required. To install `nasm` assembler, run:
+To compile assembly code, an _assembler_ is required. To install the `nasm` assembler, run:
 
 ```shell
 $ sudo apt-get install nasm
@@ -110,10 +110,24 @@ $ sudo apt-get install nasm
 
 **1. Compiling the library**
 
-To compile, run:
+To compile the library, run:
 
 ```shell
 $ make
+```
+
+**2. Using it in your code**
+
+To use the library functions in your code, simply include its header:
+
+```C
+#include "libasm.h"
+```
+
+and, when compiling your code, add the required flags:
+
+```shell
+-lasm -L path/to/libasm.a - I path/to/libasm.h
 ```
 
 ## 📋 Testing
