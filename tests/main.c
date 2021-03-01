@@ -6,13 +6,13 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 15:57:20 by apuchill          #+#    #+#             */
-/*   Updated: 2021/02/28 21:30:01 by apuchill         ###   ########.fr       */
+/*   Updated: 2021/02/28 22:42:25 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "tests.h"
 
-void	test_suit(char *ft_name, int total, int result)
+void		test_suit(char *ft_name, int total, int result)
 {
 	printf("\n%s=> Tests %s: ", C_BOLD, ft_name);
 	if (result < total)
@@ -24,7 +24,7 @@ void	test_suit(char *ft_name, int total, int result)
 	printf("%i total\n", total);
 }
 
-void	test_str(char *argv, int (*test)(char *), char *ft_name)
+void		test_str(char *argv, int (*test)(char *), char *ft_name)
 {
 	int		total;
 	int		result;
@@ -47,15 +47,26 @@ void	test_str(char *argv, int (*test)(char *), char *ft_name)
 		print_continue();
 }
 
-int		main(int argc, char *argv[])
+static void	print_welcome(void)
+{
+	char	buff[1024];
+
+	printf("\n%sBienvenue !%s%s", C_WARNING, CONT_MSG, C_END);
+	read(0, buff, 1024);
+}
+
+int			main(int argc, char *argv[])
 {
 	if (argc == 2 && (!strcmp(argv[1], "all") ||
 		!strcmp(argv[1], "ft_read") || !strcmp(argv[1], "ft_write") ||
 		!strcmp(argv[1], "ft_strcpy") || !strcmp(argv[1], "ft_strcmp") ||
 		!strcmp(argv[1], "ft_strlen") || !strcmp(argv[1], "ft_strdup")))
 	{
+		print_welcome();
 		if (!strcmp(argv[1], "ft_strlen") || !strcmp(argv[1], "all"))
 			test_str(argv[1], test_strlen, "ft_strlen");
+		if (!strcmp(argv[1], "ft_strdup") || !strcmp(argv[1], "all"))
+			test_str(argv[1], test_strdup, "ft_strdup");
 		if (!strcmp(argv[1], "ft_strcpy") || !strcmp(argv[1], "all"))
 			test_str(argv[1], test_strcpy, "ft_strcpy");
 		if (!strcmp(argv[1], "ft_strcmp") || !strcmp(argv[1], "all"))

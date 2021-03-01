@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 08:08:55 by apuchill          #+#    #+#             */
-/*   Updated: 2021/02/28 21:23:46 by apuchill         ###   ########.fr       */
+/*   Updated: 2021/02/28 22:23:31 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	test_read(void);
 int		test_write(char *str);
 int		test_strlen(char *str);
 int		test_strcpy(char *src);
+int		test_strdup(char *str);
 void	test_strcmp(char *argv);
 
 void	print_ft_title(char *ft_name);
