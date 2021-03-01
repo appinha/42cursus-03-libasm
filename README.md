@@ -81,7 +81,7 @@ void		ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void 
 
 `@/tests/`
 
-* [**\*.c**](tests/c) - source code (in C language) for testing the library.
+* [**\*.c**](tests/) - source code (in C language) for testing the library.
 * [**\*.txt**](tests/) - auxiliary files for outputting the test.
 
 ## 🛠️ Usage
@@ -127,15 +127,21 @@ To use the library functions in your code, simply include its header:
 and, when compiling your code, add the required flags:
 
 ```shell
--lasm -L path/to/libasm.a - I path/to/libasm.h
+-lasm -L path/to/libasm.a -I path/to/libasm.h
 ```
 
 ## 📋 Testing
 
-After compiling the library with `make`, simply run:
+After compiling the library with `make`, you can either run:
 
 ```shell
-$ make test
+$ make test_all
+```
+
+or, for single function testing, run:
+
+```shell
+$ make <function name>
 ```
 
 ## 📌 Useful Links
