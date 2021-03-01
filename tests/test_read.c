@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 21:16:04 by apuchill          #+#    #+#             */
-/*   Updated: 2021/02/28 21:17:55 by apuchill         ###   ########.fr       */
+/*   Updated: 2021/02/28 22:46:08 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	test_read(void)
 {
 	char	buff[1024];
+	int		errno_ft;
 	int		i;
 
 	print_ft_title("ft_read");
@@ -26,7 +27,9 @@ void	test_read(void)
 				C_WARNING, C_END);
 		write(1, "INPUT          : ", 17);
 		ft_read(0, buff, 1024);
+		errno_ft = errno;
 		printf("OUTPUT ft_read : %s", buff);
+		printf("ERRNO ft_read  : %i\n", errno_ft);
 		i--;
 	}
 }
