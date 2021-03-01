@@ -32,11 +32,11 @@
 ft_read:
 	mov		rax, 0				; put 0 (syscall ID of read) into rax
 	syscall						; ret = read(fd, buf, count)
-	cmp		rax, 0				; compare return (in rax) with 0
-	jl		ret_error			; if ret < 0 then ret_error()
+	cmp		rax, 0
+	jl		.ret_error			; if ret < 0 then ret_error()
 	ret							; return (ret)
 
-ret_error:
+.ret_error:
 	mov		rdi, rax			; tmp = ret
 	neg		rdi					; tmp = -tmp (invert value for positive errno)
 	call	__errno_location	; ret = &errno (get pointer to errno)

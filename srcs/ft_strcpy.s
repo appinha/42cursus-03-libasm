@@ -30,10 +30,10 @@ ft_strcpy:
 	mov			rax, rdi			; char *ret = &dst
 	mov			rcx, -1				; i = -1
 
-while_loop:
+.while_loop:
 	inc			rcx					; i++
 	mov			dh, byte[rsi + rcx]	; char tmp = src[i]
 	mov			byte[rdi + rcx], dh	; dst[i] = tmp
-	cmp byte	[rsi + rcx], 0		; compare src[i] with 0
-	jne			while_loop			; while (s[i] != 0)
+	cmp byte	[rsi + rcx], 0
+	jne			.while_loop			; while (s[i] != 0)
 	ret								; return (ret)

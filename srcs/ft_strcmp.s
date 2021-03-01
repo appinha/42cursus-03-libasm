@@ -33,15 +33,15 @@ while_loop:
 	inc			rcx						; i++;
 	mov			r8b, byte[rdi + rcx]	; char tmp_1 = s1[i]
 	mov			r9b, byte[rsi + rcx]	; char tmp_2 = s2[i]
-	cmp			r8b, r9b				; compare tmp_1 with tmp_2
-	jne			return					; while ((s1[i] == s2[i]) && ...
-	cmp			r8b, 0					; compare tmp_1 with 0
-	je			return					; ... (s1[i] != '\0') && ...
-	cmp			r9b, 0					; compare tmp_2 with 0
-	je			return					; ... (s2[i] != '\0'))
+	cmp			r8b, r9b
+	jne			.return					; while ((s1[i] == s2[i]) && ...
+	cmp			r8b, 0
+	je			.return					; ... (s1[i] != '\0') && ...
+	cmp			r9b, 0
+	je			.return					; ... (s2[i] != '\0'))
 	jmp			while_loop
 
-return:
+.return:
 	sub			r8b, r9b				; char tmp  = s1[i] - s2[i]
 	movsx		rax, r8b				; ret = tmp
 	ret
