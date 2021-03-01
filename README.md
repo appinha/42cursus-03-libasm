@@ -205,8 +205,9 @@ For more syscalls: [Linux System Call Table for x86 64](https://blog.rchapman.or
 
 * `mov DEST, SRC` - move data between registers, move data between registers and memory.
 * `mov DEST, VAL` - load immediate data into registers.
+* `movsx DEST, SRC` - writes to whole register.
 
-_Examples:_ `mov rdx,rax` | `mov rdx,[123]` | `mov rax,4`
+_Examples:_ `mov rdx,rax` | `mov rdx,[123]` | `mov rax,4` | `movsx rax, ch`
 
 * `push SRC` - insert onto the stack; useful for passing arguments, saving registers, etc.
 * `pop DEST` - remove topmost value from the stack onto given register. Equivalent to `mov DEST, [rsp]`; `add 8, rsp`.
