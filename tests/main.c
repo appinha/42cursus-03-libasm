@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 15:57:20 by apuchill          #+#    #+#             */
-/*   Updated: 2021/02/28 22:42:25 by apuchill         ###   ########.fr       */
+/*   Updated: 2021/02/28 23:21:39 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,17 @@ void		test_str(char *argv, int (*test)(char *), char *ft_name)
 		print_continue();
 }
 
-static void	print_welcome(void)
+static void	print_welcome(char *argv)
 {
 	char	buff[1024];
 
-	printf("\n%sBienvenue !%s%s", C_WARNING, CONT_MSG, C_END);
-	read(0, buff, 1024);
+	if (!strcmp(argv, "all"))
+	{
+		printf("\n%sBienvenue !%s%s", C_WARNING, CONT_MSG, C_END);
+		read(0, buff, 1024);
+	}
+	else
+		printf("\n%sBienvenue !%s", C_WARNING, C_END);
 }
 
 int			main(int argc, char *argv[])
@@ -62,7 +67,7 @@ int			main(int argc, char *argv[])
 		!strcmp(argv[1], "ft_strcpy") || !strcmp(argv[1], "ft_strcmp") ||
 		!strcmp(argv[1], "ft_strlen") || !strcmp(argv[1], "ft_strdup")))
 	{
-		print_welcome();
+		print_welcome(argv[1]);
 		if (!strcmp(argv[1], "ft_strlen") || !strcmp(argv[1], "all"))
 			test_str(argv[1], test_strlen, "ft_strlen");
 		if (!strcmp(argv[1], "ft_strdup") || !strcmp(argv[1], "all"))

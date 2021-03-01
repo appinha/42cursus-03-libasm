@@ -6,7 +6,7 @@
 #    By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 15:56:04 by apuchill          #+#    #+#              #
-#    Updated: 2021/02/28 22:47:23 by apuchill         ###   ########.fr        #
+#    Updated: 2021/02/28 23:19:24 by apuchill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,13 +45,41 @@ $(DIR_OBJS)/%.o :	$(DIR_SRCS)/%.s
 $(NAME):	$(OBJS)
 			@ar -rcs $(NAME) $(OBJS)
 
+.PHONY: test
 test:		$(NAME) $(TEST_SRCS)
 			@$(CC) $(TEST_SRCS) $(CFLAGS) $(INCLUDES) -o $(TEST)
 			@echo $(C_H_LINE) && cat $(DIR_TEST)/header_line1.txt && \
 			echo $(C_H_TITLE) && cat $(DIR_TEST)/header_title.txt && \
 			echo "\033[1m\033[38;5;23m42saopaulo" \
 			$(C_H_LINE) && cat $(DIR_TEST)/header_line2.txt && echo $(C_END)
+
+.PHONY: test_all
+test_all:	test
 			@./$(TEST) all
+
+.PHONY: ft_strlen
+ft_strlen:	test
+			@./$(TEST) ft_strlen
+
+.PHONY: ft_strdup
+ft_strdup:	test
+			@./$(TEST) ft_strdup
+
+.PHONY: ft_strcpy
+ft_strcpy:	test
+			@./$(TEST) ft_strcpy
+
+.PHONY: ft_strcmp
+ft_strcmp:	test
+			@./$(TEST) ft_strcmp
+
+.PHONY: ft_write
+ft_write:	test
+			@./$(TEST) ft_write
+
+.PHONY: ft_read
+ft_read:	test
+			@./$(TEST) ft_read
 
 clean:
 			@$(RM) $(OBJS)
