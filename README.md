@@ -37,7 +37,7 @@
 
 For detailed information, refer to the [**subject of this project**](https://github.com/appinha/42cursus/tree/master/_PDFs).
 
-> 🚀 **tldr:** Recoding of the following `libc` and custom functions in _Linux x86-64 Assembly (Intel syntax)_.
+> 🚀 **tldr:** this project consists of coding basic functions (see below) in _Linux x86-64 Assembly (Intel syntax)_, which are then compiled into a library for use in C language code.
 
 **Mandatory:**
 ```C
