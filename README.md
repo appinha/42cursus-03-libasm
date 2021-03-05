@@ -146,13 +146,62 @@ $ make <function name>
 
 ## 📌 Useful Links
 
-* [Tutorial playlist: x86_64 Linux Assembly](https://www.youtube.com/playlist?list=PLetF-YjXm-sCH6FrTz4AQhfH6INDQvQSn)
 * [NASM Tutorial](https://cs.lmu.edu/~ray/notes/nasmtutorial/)
+* [Tutorial playlist: x86_64 Linux Assembly](https://www.youtube.com/playlist?list=PLetF-YjXm-sCH6FrTz4AQhfH6INDQvQSn)
 * [X86 64 Register and Instruction Quick Start](https://wiki.cdot.senecacollege.ca/wiki/X86_64_Register_and_Instruction_Quick_Start)
 * [x86_64 NASM Assembly Quick Reference ("Cheat Sheet")](https://www.cs.uaf.edu/2017/fall/cs301/reference/x86_64.html)
 * [Linux System Call Table for x86 64](https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/)
+* [NASM - The Netwide Assembler (Official Documentation)](https://www.nasm.us/doc/)
 
 ## 🤓 Study Summary
+
+The **Netwide Assembler (NASM)** is an assembler and disassembler for the _Intel x86 architecture_. It can be used to write 16-bit, 32-bit (IA-32) and 64-bit (x86-64) programs. NASM is considered to be one of the most popular assemblers for Linux. - _Source: [Wikipedia](https://en.wikipedia.org/wiki/Netwide_Assembler#:~:text=The%20Netwide%20Assembler%20(NASM)%20is,most%20popular%20assemblers%20for%20Linux.)_
+
+### Structure of a NASM Program
+
+NASM is **line-based**. Most programs consist of **directives** followed by one or more **sections**. Lines can have an optional **label**. Most lines have an **instruction** followed by zero or more **operands**.
+
+The sections are:
+
+* **`.data` section** - where all data is defined before compilation.
+* **`.bss` section** - where data is allocated for future use.
+* **`.text` section** - where the actual code goes.
+
+**Basic example file**
+
+```asm
+#LABELS		#INSTRUCTIONS	#OPERANDS
+
+		global		start
+
+		section		.text
+start:
+		mov		rax, 1		; syscall ID for sys_write
+		mov		rdi, 1		; ARG1 #fd
+		mov		rsi, text	; ARG2 $buffer
+		mov		rdx, 14		; ARG3 #count
+		syscall
+		mov		rax, 60		; syscall ID for sys_exit
+		mov		rdi, 0		; ARG1 #errcode
+		syscall
+
+		section		.data
+text		db		"Hello, world!",10
+```
+
+_Notes:_
+
+* _`text` - label of address in memory where data is located in._
+* _`db` - "define bytes", a pseudo-instruction that declares bytes that will be in memory when the program runs_
+* _`,10` - \n_
+
+### Operands
+
+There are three kinds of operands used in instructions:
+
+* **register operands** - read more in the next section.
+* **memory operands** - for manipulating data stored in memory.
+* **immediate operands** - immediate values, can be written in many ways (decimal, hex, octal, binary).
 
 ### Registers
 
@@ -194,34 +243,40 @@ There are two types of registers: _"scratch"_ and _"preserved"_. **Scratch** reg
 | `r14`	| preserved					| r14	| r14d	| r14w	| r14b
 | `r15`	| preserved					| r15	| r15d	| r15w	| r15b
 
-### System Call
+### Memory
 
-A system call, or **syscall**, or function call, is when a program requests a service from the kernel. System calls will differ by operating system because different operating systems use different kernels. All syscalls have an ID (a number) associated with them. Syscalls also take arguments, i.e. a list of inputs.
+These are the basic forms of addressing with memory operands:
 
-Usage of **registers** in syscalls: a 64 bit Linux machine passes **function parameters** in `rdi`, `rsi`, `rdx`, `rcx`, `r8`, and `r9`. Any additional parameters get pushed on the stack.
+* `[ number ]`
+* `[ reg ]`
+* `[ reg + reg*scale ]` - scale is 1, 2, 4, or 8 only
+* `[ reg + number ]`
+* `[ reg + reg*scale + number ]`
 
-* `rax` - **syscall ID**.
-* `rdi`, `rsi`, `rdx`, `rcx`, `r8`, `r9` - first **six arguments** (in order); remaining arguments are on the stack.
-* `rax` - **return value** (after syscall is finished).
+The number is called the **displacement**; the plain register is called the **base**; the register with the scale is called the **index**.
 
-**Linux x86-64 Syscall List** (non exaustive)
+**Defining Data and Reserving Space / Memory Access**
 
-| syscall	| ID	| ARG1		| ARG2		| ARG3
-|:--		|:-:	|:--		|:--		|:--
-| sys_read	| 0		| #fd		| $buffer	| #count
-| sys_write	| 1		| #fd		| $buffer	| #count
-| sys_open	| 2		| $filename	| #flags	| #mode
-| sys_close	| 3		| #fd		| -			| -
-| sys_exit	| 60	| #errcode	| -			| -
-
-> _Note the syntax:_
->
-> * _Immediate (number) values are prefixed by #_
-> * _Memory address to the data (stored in the register) are prefixed by $_
-
-For more syscalls: [Linux System Call Table for x86 64](https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/)
+| C datatypeBits	| Bytes	| Register	| Access Memory	| Allocate Memory
+|:-:				|:-:	|:-:		|:-:			|:-:
+| char				| 8		| 1			| al			| BYTE [ptr] db
+| short				| 16	| 2			| ax			| WORD [ptr] dw
+| int				| 32	| 4			| eax			| DWORD [ptr] dd
+| long				| 64	| 8			| rax			| QWORD [ptr] dq
 
 ### Instructions
+
+Most of the basic instructions have the following form:
+
+* `add REG, REG`
+* `add REG, MEM`
+* `add REG, IMM`
+* `add MEM, REG`
+* `add MEM, IMM`
+
+> Note: Instructions with two memory operands are extremely rare.
+
+**Most used instructions**
 
 * `mov DEST, SRC` - move data between registers, move data between registers and memory.
 * `mov DEST, VAL` - load immediate data into registers.
@@ -315,46 +370,45 @@ _Examples:_ `and rax, rdx` | `xor rax, rdx` | `xor rax, rax`
 > * _Character values are indicated by quotation marks. Escapes (such as '\n') are permitted._
 > * _Data sources are given as the first argument (mov %r10,%r11 moves FROM r10 INTO r11)._
 
-### Memory access
+### System Call
 
-| C datatypeBits	| Bytes	| Register	| Access memory	| Allocate memory
-|:-:				|:-:	|:-:		|:-:			|:-:
-| char				| 8		| 1			| al			| BYTE [ptr] db
-| short				| 16	| 2			| ax			| WORD [ptr] dw
-| int				| 32	| 4			| eax			| DWORD [ptr] dd
-| long				| 64	| 8			| rax			| QWORD [ptr] dq
+A system call, or **syscall**, or function call, is when a program requests a service from the kernel. System calls will differ by operating system because different operating systems use different kernels. All syscalls have an ID (a number) associated with them. Syscalls also take arguments, i.e. a list of inputs.
 
-### Sections
+Usage of **registers** in syscalls: a 64 bit Linux machine passes **function parameters** in `rdi`, `rsi`, `rdx`, `rcx`, `r8`, and `r9` (in this order). Any additional parameters get pushed on the stack. In summary:
 
-All x86_64 assembly files have three sections:
+* `rax` - **syscall ID**.
+* `rdi`, `rsi`, `rdx`, `rcx`, `r8`, `r9` - first **six arguments** (in order); remaining arguments are on the stack.
+* `rax` - **return value** (after syscall is finished).
 
-* `.data` section - where all data is defined before compilation.
-* `.bss` section - where data is allocated for future use.
-* `.text` section - where the actual code goes.
+**Linux x86-64 Syscall List** (non exaustive)
 
-**Basic example file**
+| syscall	| ID	| ARG1		| ARG2		| ARG3
+|:--		|:-:	|:--		|:--		|:--
+| sys_read	| 0		| #fd		| $buffer	| #count
+| sys_write	| 1		| #fd		| $buffer	| #count
+| sys_open	| 2		| $filename	| #flags	| #mode
+| sys_close	| 3		| #fd		| -			| -
+| sys_exit	| 60	| #errcode	| -			| -
 
-```asm
-section	.data
-	text	db	"Hello, world!",10
+> _Note the syntax:_
+>
+> * _Immediate (number) values are prefixed by #_
+> * _Memory address to the data (stored in the register) are prefixed by $_
 
-section	.text
-	global	_start
+For more syscalls: [Linux System Call Table for x86 64](https://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/)
 
-_start:
-	mov rax, 1		; syscall ID for sys_write
-	mov rdi, 1		; ARG1 #fd
-	mov rsi, text	; ARG2 $buffer
-	mov rdx, 14		; ARG3 #count
-	syscall
+### Calling Conventions
 
-	mov rax, 60		; syscall ID for sys_exit
-	mov rdi, 0		; ARG1 #errcode
-	syscall
-```
+When writing code for 64-bit Linux that integrates with a C library, you must follow the calling conventions explained in the [AMD64 ABI Reference](http://www.x86-64.org/documentation/abi.pdf).
 
-_Notes:_
+A brief summary:
 
-* _`text` - label of address in memory where data is located in._
-* _`db` - define bytes_
-* _`,10` - \n_
+>The caller uses registers to pass the first 6 arguments to the callee.  Given the arguments in left-to-right order, the order of registers used is: `%rdi`, `%rsi`, `%rdx`, `%rcx`, `%r8`, and `%r9`.  Any remaining arguments are passed on the stack in reverse order so that they can be popped off the stack in order.
+>
+>The callee is responsible for perserving the value of registers `%rbp` `%rbx`, and `%r12-r15`, as these registers are owned by the caller.  The remaining registers are owned by the callee.
+>
+>The callee places its return value in `%rax` and is responsible for cleaning up its local variables as well as for removing the return address from the stack.
+>
+>The `call`, `enter`, `leave` and `ret` instructions make it easy to follow this calling convention.
+
+_\- Source: [X86-64 Architecture Guide](http://6.s081.scripts.mit.edu/sp18/x86-64-architecture-guide.html)_
