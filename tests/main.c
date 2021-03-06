@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 15:57:20 by apuchill          #+#    #+#             */
-/*   Updated: 2021/02/28 23:21:39 by apuchill         ###   ########.fr       */
+/*   Updated: 2021/03/06 11:32:21 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,12 @@ static void	print_welcome(char *argv)
 {
 	char	buff[1024];
 
+	printf("\nBienvenue !\n");
 	if (!strcmp(argv, "all"))
 	{
-		printf("\n%sBienvenue !%s%s", C_WARNING, CONT_MSG, C_END);
+		printf("%s\nPress ENTER to continue\n%s", C_WARNING, C_END);
 		read(0, buff, 1024);
 	}
-	else
-		printf("\n%sBienvenue !%s", C_WARNING, C_END);
 }
 
 int			main(int argc, char *argv[])
@@ -77,7 +76,7 @@ int			main(int argc, char *argv[])
 		if (!strcmp(argv[1], "ft_strcmp") || !strcmp(argv[1], "all"))
 			test_strcmp(argv[1]);
 		if (!strcmp(argv[1], "ft_write") || !strcmp(argv[1], "all"))
-			test_str(argv[1], test_write, "ft_write");
+			test_write(argv[1]);
 		if (!strcmp(argv[1], "ft_read") || !strcmp(argv[1], "all"))
 			test_read();
 		printf("\n");

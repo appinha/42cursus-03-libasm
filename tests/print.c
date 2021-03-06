@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 10:34:26 by apuchill          #+#    #+#             */
-/*   Updated: 2021/02/28 21:28:33 by apuchill         ###   ########.fr       */
+/*   Updated: 2021/03/05 20:00:31 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_ft_title(char *ft_name)
 
 void	print_test_title(int test_nbr)
 {
-	printf("\n%s • Test #%i%s\n", C_TEST, test_nbr, C_END);
+	printf("\n%s• Test #%i%s\n", C_TEST, test_nbr, C_END);
 }
 
 int		print_test_passed(void)

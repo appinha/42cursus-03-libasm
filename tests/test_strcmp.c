@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 13:09:27 by apuchill          #+#    #+#             */
-/*   Updated: 2021/02/28 21:26:37 by apuchill         ###   ########.fr       */
+/*   Updated: 2021/03/06 13:29:59 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static int	test(char *s1, char *s2)
 	int			ret_ft;
 	int			ret;
 
-	test_nbr = test_nbr + 1;
+	test_nbr += 1;
 	print_test_title(test_nbr);
 	ret_lib = normalize(strcmp(s1, s2));
 	ret_ft = normalize(ft_strcmp(s1, s2));
-	printf("string #1        : >|%s|<\n", s1);
-	printf("string #2        : >|%s|<\n", s2);
-	printf("RETURN strcmp    : %i\n", ret_lib);
-	printf("RETURN ft_strcmp : %i\n", ret_ft);
+	printf("%sINPUT  #1        :%s >|%s|<\n", C_TITLE, C_END, s1);
+	printf("%sINPUT  #2        :%s >|%s|<\n", C_TITLE, C_END, s2);
+	printf("%sRETURN strcmp    :%s %i\n", C_TITLE, C_END, ret_lib);
+	printf("%sRETURN ft_strcmp :%s %i\n", C_TITLE, C_END, ret_ft);
 	if (ret_lib == ret_ft)
 		ret = print_test_passed();
 	else
@@ -51,14 +51,15 @@ void		test_strcmp(char *argv)
 	char	long_s2[1024];
 
 	print_ft_title("ft_strcmp");
-	total = 8;
+	total = 9;
 	result = 0;
 	memset(long_s1, '.', 1024);
 	memset(long_s2, '.', 1024);
 	long_s1[1023] = '\0';
 	long_s2[1023] = '\0';
-	result += test("Hello, world!", "Bonjour le monde!");
-	result += test("", "\0not to be compared");
+	result += test("", "");
+	result += test("", "Bonjour le monde!");
+	result += test("Hello, world!", "\0not to be compared");
 	result += test(long_s1, long_s2);
 	long_s1[2] = 'A';
 	result += test(long_s1, long_s2);
