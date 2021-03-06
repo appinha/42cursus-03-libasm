@@ -6,7 +6,7 @@
 #    By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/16 15:56:04 by apuchill          #+#    #+#              #
-#    Updated: 2021/02/28 23:19:24 by apuchill         ###   ########.fr        #
+#    Updated: 2021/03/06 12:50:50 by apuchill         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ CC			= clang
 CFLAGS		= -Wall -Wextra -Werror -lasm -L .
 
 RM			= /bin/rm -f
+NORM		= ~/.norminette/norminette.rb
 
 C_H_LINE	= "\033[38;5;43m"
 C_H_TITLE	= "\033[1m\033[38;5;199m"
@@ -80,6 +81,10 @@ ft_write:	test
 .PHONY: ft_read
 ft_read:	test
 			@./$(TEST) ft_read
+
+.PHONY: norm
+norm:
+			$(NORM) */*.h */*.c
 
 clean:
 			@$(RM) $(OBJS)
