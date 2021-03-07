@@ -6,7 +6,7 @@
 /*   By: apuchill <apuchill@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/28 21:14:55 by apuchill          #+#    #+#             */
-/*   Updated: 2021/03/06 13:45:24 by apuchill         ###   ########.fr       */
+/*   Updated: 2021/03/06 20:42:58 by apuchill         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static int	test_fd(char *str, int fd_1, int fd_2)
 	errno_ft[1] = errno;
 	printf("%sINPUT  fd #1   :%s %i\n", C_TITLE, C_END, fd_1);
 	printf("%sINPUT  fd #2   :%s %i\n", C_TITLE, C_END, fd_2);
-	printf("%sRETURN read    :%s %i\n", C_TITLE, C_END, ret_ft[0]);
-	printf("%sRETURN ft_read :%s %i\n", C_TITLE, C_END, ret_ft[1]);
-	printf("%sERRNO  read    :%s %i\n", C_TITLE, C_END, errno_ft[0]);
-	printf("%sERRNO  ft_read :%s %i\n", C_TITLE, C_END, errno_ft[1]);
+	printf("%sRETURN write    :%s %i\n", C_TITLE, C_END, ret_ft[0]);
+	printf("%sRETURN ft_write :%s %i\n", C_TITLE, C_END, ret_ft[1]);
+	printf("%sERRNO  write    :%s %i\n", C_TITLE, C_END, errno_ft[0]);
+	printf("%sERRNO  ft_write :%s %i\n", C_TITLE, C_END, errno_ft[1]);
 	if (ret_ft[0] == ret_ft[1] && errno_ft[0] == errno_ft[1])
 		ret = print_test_passed();
 	else
