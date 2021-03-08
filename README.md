@@ -37,9 +37,10 @@
 
 For detailed information, refer to the [**subject of this project**](https://github.com/appinha/42cursus/tree/master/_PDFs).
 
-> 🚀 **tldr:** this project consists of coding basic functions (see below) in _Linux x86-64 Assembly (Intel syntax)_, which are then compiled into a library for use in C language code.
+	🚀 TLDR: this project consists of coding basic functions (see below) in Linux x86-64 Assembly
+	(Intel syntax), which are then compiled into a library for use in C language code.
 
-**Mandatory:**
+### Mandatory
 ```C
 size_t		ft_strlen(const char *s);
 char		*ft_strcpy(char *dst, const char *src);
@@ -49,7 +50,7 @@ ssize_t		ft_read(int fd, void *buf, size_t count);
 char		*ft_strdup(const char *s1);
 ```
 
-**Bonus:**
+### Bonus
 ```C
 typedef struct	s_list
 {
